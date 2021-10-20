@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -26,6 +26,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {Picker} from '@react-native-picker/picker';
 
 const Section: React.FC<{
   title: string;
@@ -56,6 +57,8 @@ const Section: React.FC<{
 };
 
 const App = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState();
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -65,6 +68,14 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <Picker
+        selectedValue={selectedLanguage}
+        onValueChange={(itemValue, itemIndex) =>
+          setSelectedLanguage(itemValue)
+        }>
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
